@@ -74,7 +74,7 @@ function ProductViewModal({open, setOpen, product, isAvailable}) {
                                     text="Out of Stock"
                                     icon={MdClose}
                                     bg="bg-rose-200"
-                                    color="text-rose-900"
+                                    color="text-rose-905"
                                 />
                                 )
                             }
