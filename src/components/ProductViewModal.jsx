@@ -37,14 +37,14 @@ function ProductViewModal({open, setOpen, product, isAvailable}) {
             {/*    Open dialog*/}
             {/*</Button>*/}
 
-            <Dialog open={open} as="div" className="relative z-10 focus:outline-none" onClose={close}>
+            <Dialog open={open} as="div" className="relative z-10" onClose={close}>
                 <DialogBackdrop className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
                 <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
                     <div className="flex min-h-full items-center justify-center p-4">
                         <DialogPanel
                             transition
                             className="relative transform overflow-hidden rounded-lg bg-white shadow-xl transistion-all
-                            md:max-w[620px] md:min-w-[620px] w-full"
+                            md:max-w-[620px] md:min-w-[620px] w-full"
                         >
 
                             {
