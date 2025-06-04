@@ -1,31 +1,45 @@
 import ProductCard from "./ProductCard.jsx";
 import {FaExclamationCircle, FaExclamationTriangle} from "react-icons/fa";
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
+import {fetchProducts} from "../store/actions/index.js";
 
 const Products = () => {
     const isLoading = false;
     const errorMessage = "";
-    const products = [
-        {
-            productId: 652,
-            productName: "IPhone Xs max",
-            image: "https://placehold.co/600x400",
-            description: "Experience the latest in mobile technology with advertisement",
-            quantity: 10,
-            price: 1450.0,
-            discount: 10.0,
-            specialPrice: 1305.0,
-        },
-        {
-            productId: 654,
-            productName: "Macbook Air M25",
-            image: "https://placehold.co/600x400",
-            description: "Ultra thin laptop with Apple's M2 Chip, providing new experience",
-            quantity: 0,
-            price: 2550.0,
-            discount: 15.0,
-            specialPrice: 2305.0,
-        },
-    ]
+
+    const { products } = useSelector(
+        (state) => state.products,
+    )
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchProducts());
+    }, [dispatch]);
+
+    // const products = [
+    //     {
+    //         productId: 652,
+    //         productName: "IPhone Xs max",
+    //         image: "https://placehold.co/600x400",
+    //         description: "Experience the latest in mobile technology with advertisement",
+    //         quantity: 10,
+    //         price: 1450.0,
+    //         discount: 10.0,
+    //         specialPrice: 1305.0,
+    //     },
+    //     {
+    //         productId: 654,
+    //         productName: "Macbook Air M25",
+    //         image: "https://placehold.co/600x400",
+    //         description: "Ultra thin laptop with Apple's M2 Chip, providing new experience",
+    //         quantity: 0,
+    //         price: 2550.0,
+    //         discount: 15.0,
+    //         specialPrice: 2305.0,
+    //     },
+    // ]
 
     return (
         <div className='lg:px-14 sm:px-8 px-4 py-14 2xl:w-[90%] 2xl:mx-auto'>
