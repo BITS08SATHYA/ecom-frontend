@@ -3,6 +3,7 @@ import {FaExclamationCircle, FaExclamationTriangle} from "react-icons/fa";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {fetchProducts} from "../store/actions/index.js";
+import { login } from "../api/login.js";
 
 const Products = () => {
     const isLoading = false;
@@ -14,8 +15,17 @@ const Products = () => {
 
     const dispatch = useDispatch();
 
+    // useEffect(() => {
+    //     dispatch(fetchProducts());
+    // }, [dispatch]);
+
     useEffect(() => {
-        dispatch(fetchProducts());
+        const doLoginAndFetch = async () => {
+            await login("user1", "password1"); // 👈 Hardcoded credentials
+            dispatch(fetchProducts());         // ✅ Will now include the cookie
+        };
+
+        doLoginAndFetch();
     }, [dispatch]);
 
     // const products = [
@@ -56,7 +66,7 @@ const Products = () => {
                 <div className="min-h-[700px]">
                     <div className="pb-6 pt-14 grid 2xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-y-6 gap-x-6">
                         {products &&
-                        products.map((item, i) =>
+                            products.map((item, i) =>
                             <ProductCard  key={i} {...item} />
                         )}
                     </div>

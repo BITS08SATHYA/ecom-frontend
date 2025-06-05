@@ -4,7 +4,14 @@ import api from "../../api/api.js";
 
 export const fetchProducts = () => async (dispatch) => {
     try {
-        const { data } = await api.get(`/public/products`);
+        const { data } = await api.get(`/public/products`,{
+            params: {
+                pageNumber: 0,
+                pageSize: 10,
+                sortBy: 'productId',
+                sortOrder: 'desc',
+            },
+        });
 
         dispatch({
             type: "FETCH_PRODUCTS",

@@ -4,7 +4,7 @@ import {productReducer} from "./ProductReducer.jsx";
 
 export const store = configureStore({
     reducer: {
-        product: productReducer,
+        products: productReducer,
     },
     preloadedState: {
 
