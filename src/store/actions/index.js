@@ -13,6 +13,8 @@ export const fetchProducts = () => async (dispatch) => {
             },
         });
 
+
+
         dispatch({
             type: "FETCH_PRODUCTS",
             payload: data.content,
@@ -22,6 +24,8 @@ export const fetchProducts = () => async (dispatch) => {
             totalPages: data.totalPages,
             lastPage: data.lastPage
         });
+
+        console.log(data.content)
 
     }catch(error){
         console.log(error)
