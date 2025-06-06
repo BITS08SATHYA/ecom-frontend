@@ -4,10 +4,15 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {fetchProducts} from "../store/actions/index.js";
 import { login } from "../api/login.js";
+import Filter from "./Filter.jsx";
 
 const Products = () => {
-    const isLoading = false;
-    const errorMessage = "";
+
+    const { isLoading, errorMessage } = useSelector((state) => state.errors);
+
+    //
+    // const isLoading = false;
+    // const errorMessage = "";
 
     const { products } = useSelector(
         (state) => state.products,
@@ -53,6 +58,7 @@ const Products = () => {
 
     return (
         <div className='lg:px-14 sm:px-8 px-4 py-14 2xl:w-[90%] 2xl:mx-auto'>
+            <Filter />
             {isLoading ? (
                 <p>Loading...</p>
             ): errorMessage ? (

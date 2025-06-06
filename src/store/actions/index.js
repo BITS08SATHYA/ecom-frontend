@@ -4,16 +4,19 @@ import api from "../../api/api.js";
 
 export const fetchProducts = () => async (dispatch) => {
     try {
-        const { data } = await api.get(`/public/products`,{
+
+        dispatch({type: "IS_FETCHING"});
+
+        const { data } = await api.get(`/public/products`,
+            {
             params: {
                 pageNumber: 0,
                 pageSize: 10,
                 sortBy: 'productId',
                 sortOrder: 'desc',
             },
-        });
-
-
+        }
+        );
 
         dispatch({
             type: "FETCH_PRODUCTS",
@@ -25,9 +28,12 @@ export const fetchProducts = () => async (dispatch) => {
             lastPage: data.lastPage
         });
 
-        console.log(data.content)
+        dispatch({type: "IS_SUCCESS"});
+        // console.log(data.content)
 
     }catch(error){
         console.log(error)
+        dispatch({type: "IS_ERROR",
+        payload: error?.response?.data?.message || "Failed to fetch products"});
     }
 };
