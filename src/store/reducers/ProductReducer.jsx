@@ -1,4 +1,4 @@
-import products from "../../components/Products.jsx";
+import products from "../../components/products/Products.jsx";
 
 const initialState = {
     products: null,

@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit"
-import products from "../../components/Products.jsx";
+import products from "../../components/products/Products.jsx";
 import {productReducer} from "./ProductReducer.jsx";
 import {errorReducer} from "./errorReducer.js";
 
