@@ -5,6 +5,7 @@ import {useEffect} from "react";
 import {fetchProducts} from "../store/actions/index.js";
 import { login } from "../api/login.js";
 import Filter from "./Filter.jsx";
+import useProductFilter from "./useProductFilter.jsx";
 
 const Products = () => {
 
@@ -20,18 +21,17 @@ const Products = () => {
 
     const dispatch = useDispatch();
 
+    useProductFilter();
+
+
     // useEffect(() => {
-    //     dispatch(fetchProducts());
+    //     const doLoginAndFetch = async () => {
+    //         await login("user1", "password1"); // 👈 Hardcoded credentials
+    //         dispatch(fetchProducts());         // ✅ Will now include the cookie
+    //     };
+    //
+    //     doLoginAndFetch();
     // }, [dispatch]);
-
-    useEffect(() => {
-        const doLoginAndFetch = async () => {
-            await login("user1", "password1"); // 👈 Hardcoded credentials
-            dispatch(fetchProducts());         // ✅ Will now include the cookie
-        };
-
-        doLoginAndFetch();
-    }, [dispatch]);
 
     // const products = [
     //     {

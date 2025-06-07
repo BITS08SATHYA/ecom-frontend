@@ -2,20 +2,21 @@
 import axios from "axios";
 import api from "../../api/api.js";
 
-export const fetchProducts = () => async (dispatch) => {
+export const fetchProducts = (queryString) => async (dispatch) => {
     try {
 
         dispatch({type: "IS_FETCHING"});
 
-        const { data } = await api.get(`/public/products`,
-            {
-            params: {
-                pageNumber: 0,
-                pageSize: 10,
-                sortBy: 'productId',
-                sortOrder: 'desc',
-            },
-        }
+        const { data } = await api.get(`/public/products?${queryString}`
+        //     {
+        //     params: {
+        //         // query: queryString,
+        //         pageNumber: 0,
+        //         pageSize: 10,
+        //         sortBy: 'productId',
+        //         sortOrder: 'desc',
+        //     },
+        // }
         );
 
         dispatch({
