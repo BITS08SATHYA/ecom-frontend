@@ -6,6 +6,7 @@ import {fetchCategories} from "../store/actions/index.js";
 import { login } from "../api/login.js";
 import Filter from "./Filter.jsx";
 import useProductFilter from "./useProductFilter.jsx";
+import Loader from "./Loader.jsx";
 
 const Products = () => {
 
@@ -64,7 +65,7 @@ const Products = () => {
         <div className='lg:px-14 sm:px-8 px-4 py-14 2xl:w-[90%] 2xl:mx-auto'>
             <Filter categories={categories ? categories : []} />
             {isLoading ? (
-                <p>Loading...</p>
+                <Loader text = {"Products Loading"} />
             ): errorMessage ? (
                 <div className="flex justify-center items-center h-[200px]">
                     <FaExclamationTriangle className="text-slate-800 text-3xl mr-2"  />
