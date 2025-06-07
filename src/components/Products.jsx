@@ -7,6 +7,7 @@ import { login } from "../api/login.js";
 import Filter from "./Filter.jsx";
 import useProductFilter from "./useProductFilter.jsx";
 import Loader from "./Loader.jsx";
+import  Paginations  from "./Paginations";
 
 const Products = () => {
 
@@ -16,7 +17,7 @@ const Products = () => {
     // const isLoading = false;
     // const errorMessage = "";
 
-    const { products, categories } = useSelector(
+    const { products, categories, pagination } = useSelector(
         (state) => state.products,
     )
 
@@ -81,7 +82,16 @@ const Products = () => {
                             <ProductCard  key={i} {...item} />
                         )}
                     </div>
+
+                    <div className="flex justify-center pt-10">
+                        <Paginations
+                            numberOfPage = {pagination?.totalPages}
+                            totalProducts = {pagination.totalElements}
+                        />
+                    </div>
+
                 </div>
+
             )}
         </div>
     )
