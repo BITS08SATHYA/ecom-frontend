@@ -3,16 +3,16 @@ import {FiArrowDown, FiArrowUp, FiRefreshCw, FiSearch} from "react-icons/fi";
 import {FormControl, InputLabel, MenuItem, Select, Tooltip, Button} from "@mui/material";
 import {useLocation, useNavigate, useSearchParams} from "react-router-dom";
 
-const Filter = () => {
+const Filter = ({ categories }) => {
 
-    const categories = [
-        { categoryId: 1, categoryName: "Electronics" },
-        { categoryId: 2, categoryName: "Clothing" },
-        { categoryId: 3, categoryName: "Furniture" },
-        { categoryId: 4, categoryName: "Books" },
-        { categoryId: 5, categoryName: "Toys" },
-
-    ];
+    // const categories = [
+    //     { categoryId: 1, categoryName: "Electronics" },
+    //     { categoryId: 2, categoryName: "Clothing" },
+    //     { categoryId: 3, categoryName: "Furniture" },
+    //     { categoryId: 4, categoryName: "Books" },
+    //     { categoryId: 5, categoryName: "Toys" },
+    //
+    // ];
 
     const [searchParams] = useSearchParams()
     const params = new URLSearchParams(searchParams);

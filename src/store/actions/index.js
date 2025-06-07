@@ -1,5 +1,3 @@
-// import {dispatch} from "react-hot-toast/src/core/store.js";
-import axios from "axios";
 import api from "../../api/api.js";
 
 export const fetchProducts = (queryString) => async (dispatch) => {
@@ -7,7 +5,7 @@ export const fetchProducts = (queryString) => async (dispatch) => {
 
         dispatch({type: "IS_FETCHING"});
 
-        const { data } = await api.get(`/public/products?${queryString}`
+        const { data } = await api.get(`/public/products?${queryString}`);
         //     {
         //     params: {
         //         // query: queryString,
@@ -17,7 +15,7 @@ export const fetchProducts = (queryString) => async (dispatch) => {
         //         sortOrder: 'desc',
         //     },
         // }
-        );
+        // );
 
         dispatch({
             type: "FETCH_PRODUCTS",
@@ -36,5 +34,32 @@ export const fetchProducts = (queryString) => async (dispatch) => {
         console.log(error)
         dispatch({type: "IS_ERROR",
         payload: error?.response?.data?.message || "Failed to fetch products"});
+    }
+};
+
+export const fetchCategories = (queryString) => async (dispatch) => {
+    try {
+
+        dispatch({type: "CATEGORY_LOADER"});
+
+        const { data } = await api.get(`/public/categories`);
+
+        dispatch({
+            type: "FETCH_CATEGORIES",
+            payload: data.content,
+            pageNumber: data.pageNumber,
+            pageSize: data.pageSize,
+            totalElements: data.totalElements,
+            totalPages: data.totalPages,
+            lastPage: data.lastPage
+        });
+
+        dispatch({type: "IS_ERROR"});
+        // console.log(data.content)
+
+    }catch(error){
+        console.log(error)
+        dispatch({type: "IS_ERROR",
+            payload: error?.response?.data?.message || "Failed to fetch categories"});
     }
 };

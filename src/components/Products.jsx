@@ -2,7 +2,7 @@ import ProductCard from "./ProductCard.jsx";
 import {FaExclamationCircle, FaExclamationTriangle} from "react-icons/fa";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {fetchProducts} from "../store/actions/index.js";
+import {fetchCategories} from "../store/actions/index.js";
 import { login } from "../api/login.js";
 import Filter from "./Filter.jsx";
 import useProductFilter from "./useProductFilter.jsx";
@@ -15,13 +15,17 @@ const Products = () => {
     // const isLoading = false;
     // const errorMessage = "";
 
-    const { products } = useSelector(
+    const { products, categories } = useSelector(
         (state) => state.products,
     )
 
     const dispatch = useDispatch();
 
     useProductFilter();
+
+    useEffect(() => {
+        dispatch(fetchCategories());
+    }, [dispatch]);
 
 
     // useEffect(() => {
@@ -58,7 +62,7 @@ const Products = () => {
 
     return (
         <div className='lg:px-14 sm:px-8 px-4 py-14 2xl:w-[90%] 2xl:mx-auto'>
-            <Filter />
+            <Filter categories={categories ? categories : []} />
             {isLoading ? (
                 <p>Loading...</p>
             ): errorMessage ? (
