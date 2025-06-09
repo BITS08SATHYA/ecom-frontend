@@ -1,3 +1,5 @@
+import {bannerImageOne, bannerImageThree, bannerImageTwo} from "./constant.js";
+
 export const bannerLists = [
     {
         id: 1,
