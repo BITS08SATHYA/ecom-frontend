@@ -26,7 +26,7 @@ const HeroBanner = () => {
             <Swiper
                 grabCursor = {false}
                 autoplay = {{
-                    delay: 2000,
+                    delay: 4000,
                     disableOnInteraction: false,
             }}
                 navigation
@@ -37,7 +37,7 @@ const HeroBanner = () => {
                 >
                 {bannerLists.map((item, i) => (
                     <SwiperSlide key={item.id}>
-                        <div className={`carousel-item rounded-md sm:h-[500px] h-96 ${colors[i]}`} key={i}>
+                        <div className={`carousel-item flex flex-col items-center justify-center rounded-md sm:h-[500px] h-96 ${colors[i]}`} key={i}>
                             <div className="flex items-center justify-center">
                             <div className="hidden lg:flex justify-center w-1/2 p-8">
                                 <div className="text-center">
