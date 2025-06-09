@@ -5,17 +5,17 @@ export const fetchProducts = (queryString) => async (dispatch) => {
 
         dispatch({type: "IS_FETCHING"});
 
-        const { data } = await api.get(`/public/products?${queryString}`);
-        //     {
-        //     params: {
-        //         // query: queryString,
-        //         pageNumber: 0,
-        //         pageSize: 10,
-        //         sortBy: 'productId',
-        //         sortOrder: 'desc',
-        //     },
-        // }
-        // );
+        const { data } = await api.get(`/public/products?${queryString}`,
+            {
+            params: {
+                // query: queryString,
+                pageNumber: 0,
+                pageSize: 10,
+                sortBy: 'productId',
+                sortOrder: 'desc',
+            },
+        }
+        );
 
         dispatch({
             type: "FETCH_PRODUCTS",
@@ -37,7 +37,7 @@ export const fetchProducts = (queryString) => async (dispatch) => {
     }
 };
 
-export const fetchCategories = (queryString) => async (dispatch) => {
+export const fetchCategories = () => async (dispatch) => {
     try {
 
         dispatch({type: "CATEGORY_LOADER"});
