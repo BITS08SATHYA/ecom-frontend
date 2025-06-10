@@ -1,4 +1,4 @@
-import ProductCard from "./ProductCard.jsx";
+import ProductCard from "./shared/ProductCard.jsx";
 
 const products = [
     {
@@ -61,7 +61,6 @@ const About = () => {
                             price={product.price}
                             about
                         >
-
                         </ProductCard>
                     ))}
                 </div>
