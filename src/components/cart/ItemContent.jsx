@@ -56,7 +56,7 @@ const ItemContent = ({
             <div className="md:col-span-2 justify-self-start flex  flex-col gap-2 ">
                 <div className="flex md:flex-row flex-col lg:gap-4 sm:gap-3 gap-0 items-start ">
                     <h3 className="lg:text-[17px] text-sm font-semibold text-slate-600">
-                        {truncateText(productName)}
+                        {(productName)}
                     </h3>
                 </div>
 
