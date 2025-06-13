@@ -65,11 +65,15 @@ const ProductCard = ({
                         specialPrice
                     })
                 }} className="text-lg font-semibold mb-2 cursor-pointer">
-                    {truncateText(productName, 50)}
+                    {/*{truncateText(productName, 20)}*/}
+                    {productName}
                 </h2>
 
                 <div className="min-h-20 max-h-20">
-                    <p className="text-gray-600 text-sm">{truncateText(description,80)}</p>
+                    <p className="text-gray-600 text-sm">
+                        {/*{truncateText(description,80)}*/}
+                        {description}
+                    </p>
                 </div>
 
 

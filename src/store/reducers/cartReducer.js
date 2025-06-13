@@ -11,7 +11,7 @@ export const cartReducer = (state = initialState, action) => {
         case "ADD_CART":
             const productToAdd = action.payload;
             const existingProduct = state.cart.find(
-                (item) => item.prodcutId === productToAdd.productId
+                (item) => item.productId === productToAdd.productId
             );
 
             if(existingProduct){
@@ -39,5 +39,4 @@ export const cartReducer = (state = initialState, action) => {
             return state;
     }
 
-    return state;
 }

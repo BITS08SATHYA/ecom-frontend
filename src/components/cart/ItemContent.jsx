@@ -2,7 +2,7 @@ import {useState} from "react";
 import {HiOutlineTrash} from "react-icons/hi2";
 import SetQuantity from "./SetQuantity.jsx";
 import {useDispatch} from "react-redux";
-import {increaseCartQuantity} from "../../store/actions/index.js";
+import {decreaseCartQuantity, increaseCartQuantity} from "../../store/actions/index.js";
 import toast from "react-hot-toast";
 
 const ItemContent = ({
@@ -24,6 +24,19 @@ const ItemContent = ({
             toast,
             currentQuantity,
             setCurrentQuantity,
+        ));
+    }
+
+    const handleQtyDecrease = (cartItems) => {
+
+        if (currentQuantity > 1){
+            const newQuantity = currentQuantity - 1;
+            setCurrentQuantity(newQuantity);
+        }
+
+        dispatch(decreaseCartQuantity(
+            cartItems,
+            currentQuantity,
         ));
     }
 
@@ -84,9 +97,18 @@ const ItemContent = ({
                        productId,
                        quantity,
                    })}
+                    handleQtyDecrease={() => handleQtyDecrease(
+                        image,
+                        productName,
+                        description,
+                        specialPrice,
+                        price,
+                        productId,
+                        quantity,
+                    )}
                />
             </div>
-            {/*handleQtyDecrease={() => {}}*/}
+
 
             <div className="justify-self-center lg:text-[17px] text-sm text-slate-600 font-semibold">
                 {Number(specialPrice) * Number(currentQuantity)}
