@@ -1,6 +1,9 @@
 import {useState} from "react";
 import {HiOutlineTrash} from "react-icons/hi2";
 import SetQuantity from "./SetQuantity.jsx";
+import {useDispatch} from "react-redux";
+import {increaseCartQuantity} from "../../store/actions/index.js";
+import toast from "react-hot-toast";
 
 const ItemContent = ({
                          productId,
@@ -13,7 +16,18 @@ const ItemContent = ({
                          specialPrice,
     cartId
                      }) => {
-    const [ currentQunantity, setCurrentQunantity ] = useState(quantity);
+    const [ currentQuantity, setCurrentQuantity ] = useState(quantity);
+    const dispatch = useDispatch();
+
+    const handleQtyIncrease = (cartItems) => {
+        dispatch(increaseCartQuantity(cartItems,
+            toast,
+            currentQuantity,
+            setCurrentQuantity,
+        ));
+    }
+
+
     return (
 
         <div className="w-full grid md:grid-cols-5 grid-cols-4 md:text-md text-sm gap-4 items-center  border-[1px] border-slate-200  rounded-md  lg:px-4  py-4 p-2">
@@ -56,14 +70,26 @@ const ItemContent = ({
             </div>
 
             <div className="justify-self-center lg:text-[17px] text-sm text-slate-600 font-semibold">
-               <SetQuantity quantity={currentQunantity} cardCounter={true}
-               handleQtyIncrease={() => {}}
-                            handleQtyDecrease={() => {}}
+
+                <SetQuantity
+                    quantity={currentQuantity}
+                    cardCounter={true}
+                handleQtyIncrease={() => handleQtyIncrease(
+                   {
+                       image,
+                       productName,
+                       description,
+                       specialPrice,
+                       price,
+                       productId,
+                       quantity,
+                   })}
                />
             </div>
+            {/*handleQtyDecrease={() => {}}*/}
 
             <div className="justify-self-center lg:text-[17px] text-sm text-slate-600 font-semibold">
-                {Number(specialPrice) * Number(currentQunantity)}
+                {Number(specialPrice) * Number(currentQuantity)}
             </div>
         </div>
 

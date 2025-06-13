@@ -5,7 +5,7 @@ export const fetchProducts = (queryString) => async (dispatch) => {
 
         dispatch({type: "IS_FETCHING"});
 
-        const { data } = await api.get(`/public/products?${queryString}`,
+        const { data } = await api.get(`/public/products?`,
             {
             params: {
                 // query: queryString,
@@ -68,6 +68,7 @@ export const addToCart = (data, qty=1, toast) =>
     (dispatch, getState) => {
 //           FInd the product
         const { products } = getState().products;
+        console.log(products);
         const getProduct = products.find(
             (item) => item.productId === data.productId
         );
@@ -84,3 +85,32 @@ export const addToCart = (data, qty=1, toast) =>
         }
 //         if not --> error
 };
+
+export const increaseCartQuantity = (data, toast, currentQuantity, setCurrentQuantity) =>
+    (dispatch, getState) => {
+    // Find the product
+        const { products } = getState().products;
+
+        console.log("Products: ", products);
+
+        const getProduct = products.find(
+            (item) => item.productId === data.productId
+        );
+
+        const isQuantityExist = getProduct.quantity >= currentQuantity + 1;
+
+        if (isQuantityExist) {
+            const newQuantity = currentQuantity + 1;
+            setCurrentQuantity(newQuantity);
+
+            dispatch({
+                type: "ADD_CART",
+                payload: {...data, quantity: newQuantity + 1},
+            });
+
+            localStorage.setItem("cartItems", JSON.stringify(getState().carts.cart));
+        }else{
+            toast.error("Quantity Reached to Limit")
+        }
+
+    };
