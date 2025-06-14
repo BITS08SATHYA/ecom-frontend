@@ -1,4 +1,4 @@
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {useForm} from "react-hook-form";
 import {AiOutlineLogin} from "react-icons/ai";
@@ -72,13 +72,19 @@ const LogIn = () => {
                     className="bg-blue-500
                     flex gap-2 items-center justify-center font-semibold text-white w-full py-2
                      hover:text-slate-400 transition-colors duration-100 rounded-sm my-3"
-                    type="submit"
+                    type="submit">
                     {loader ? (
-                        Loading....
+                        <>Loading....</>
                     ): (
-                        Login
+                        <>Login</>
                         )}
-                >Hello</button>
+                </button>
+                <p className="text-center text-sm text-slate-700 mt-6">
+                    Don't have an account ?
+                    <Link to="/register" className="font-semibold underline hover:text-black">
+                    <span> SignUp </span>
+                    </Link>
+                </p>
             </form>
         </div>
     )
