@@ -1,10 +1,11 @@
 import {Link, useLocation} from "react-router-dom";
-import {FaCartPlus, FaShoppingCart, FaSignInAlt, FaStore} from "react-icons/fa";
+import { FaShoppingCart, FaSignInAlt, FaStore} from "react-icons/fa";
 import {Badge} from "@mui/material";
 import {useState} from "react";
 import {RxCross2} from "react-icons/rx";
 import {IoIosMenu} from "react-icons/io";
 import {useSelector} from "react-redux";
+import UserMenu from "../UserMenu.jsx";
 
 const Navbar = () =>{
     const path = useLocation().pathname;
@@ -62,7 +63,7 @@ const Navbar = () =>{
 
                     {user && user.id ? (
                             <li className="font-[500] transition-all duration-150">
-                                <p>Welcome</p>
+                                <UserMenu />
                             </li>
                     ) : (
 
