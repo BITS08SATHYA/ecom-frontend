@@ -6,6 +6,7 @@ import {FaUserPlus} from "react-icons/fa";
 import {useDispatch} from "react-redux";
 import {registerNewUser} from "../../store/actions/index.js";
 import toast from "react-hot-toast";
+import Spinners from "../shared/Spinners.jsx";
 
 const Register = () => {
 
@@ -92,7 +93,9 @@ const Register = () => {
                      hover:text-slate-400 transition-colors duration-100 rounded-sm my-3"
                     type="submit">
                     {loader ? (
-                        <>Loading....</>
+                        <>
+                         <Spinners />    Loading....
+                        </>
                     ): (
                         <>Register</>
                     )}

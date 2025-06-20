@@ -6,6 +6,7 @@ import InputField from "../shared/InputField.jsx";
 import {authenticateSignInUser} from "../../store/actions/index.js";
 import {useDispatch} from "react-redux";
 import toast from "react-hot-toast";
+import Spinners from "../shared/Spinners.jsx";
 
 const LogIn = () => {
 
@@ -80,7 +81,9 @@ const LogIn = () => {
                      hover:text-slate-400 transition-colors duration-100 rounded-sm my-3"
                     type="submit">
                     {loader ? (
-                        <>Loading....</>
+                        <>
+                            <Spinners />    Loading....
+                        </>
                     ): (
                         <>Login</>
                         )}
