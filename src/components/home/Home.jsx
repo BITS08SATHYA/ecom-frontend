@@ -1,22 +1,25 @@
 import HeroBanner from "./HeroBanner.jsx";
-import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
-import {fetchProducts} from "../../store/actions/index.js";
-import {login} from "../../api/login.js";
+import { useSelector} from "react-redux";
 import ProductCard from "../shared/ProductCard.jsx";
 import Loader from "../shared/Loader.jsx";
 import {FaExclamationTriangle} from "react-icons/fa";
 
+import useProductFilter from "../../hooks/useProductFilter.js";
+
 const Home = () => {
 
-    const dispatch = useDispatch();
     const { products } = useSelector((state) => state.products);
     const { isLoading, errorMessage } = useSelector((state) => state.errors);
 
+    console.log(products);
 
-    useEffect(() => {
-        dispatch(fetchProducts());
-    }, [dispatch]);
+
+
+    // useEffect(() => {
+    //     fetchProducts();
+    // },[dispatch]);
+
+    useProductFilter();
 
     return  (
         <div className="lg:px-14 sm:px-8 px-4">
@@ -48,7 +51,7 @@ const Home = () => {
                             <div className="pb-6 pt-14 grid 2xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-x-4 gap-y-4">
                                 {
                                     products &&
-                                    products?.slice(0,8)
+                                    products?.slice(0,4)
                                         .map((item, i) => <ProductCard key={i} {...item}/>
                                         )
                                 }

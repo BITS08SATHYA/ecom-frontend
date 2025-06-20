@@ -3,18 +3,20 @@ import api from "../../api/api.js";
 export const fetchProducts = (queryString) => async (dispatch) => {
     try {
 
+        console.log(`Home Page Fetching: ${queryString}`);
+
         dispatch({type: "IS_FETCHING"});
 
-        const { data } = await api.get(`/public/products?`,
-            {
-            params: {
-                // query: queryString,
-                pageNumber: 0,
-                pageSize: 10,
-                sortBy: 'productId',
-                sortOrder: 'desc',
-            },
-        }
+        const { data } = await api.get(`/public/products?${queryString}`
+        //     {
+        //     params: {
+        //         // query: queryString,
+        //         pageNumber: 0,
+        //         pageSize: 10,
+        //         sortBy: 'price',
+        //         sortOrder: 'desc',
+        //     },
+        // }
         );
 
         dispatch({
@@ -134,4 +136,22 @@ export const removeFromCart =
     dispatch({type: "REMOVE_CART", payload: data});
     toast.success(`${data.productName} removed from the cart`);
     localStorage.setItem("cartItems", JSON.stringify(getState().carts.cart));
+}
+
+export const authenticateSignInUser
+    = (sendData, toast, reset, navigate, setLoader ) => async (dispatch) => {
+    try{
+        setLoader(true);
+        const { data } = await api.post("/auth/signin", sendData);
+        dispatch({ type: "LOGIN_USER", payload: data });
+        localStorage.setItem("auth", JSON.stringify(data));
+        reset()
+        toast.success("Login success")
+        navigate("/")
+    }catch(error){
+        console.log(error)
+        toast.error(error.response.data?.message || "Internal Server Error");
+    }finally{
+        setLoader(false);
+    }
 }
