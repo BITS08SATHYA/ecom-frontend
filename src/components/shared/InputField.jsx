@@ -21,7 +21,8 @@ const InputField = ({
                     errors[id]?.message ? "border-red-500" : "border-slate-700"
                 }`}
                 {...register(id, {
-                    required: {value: required ,message},
+                    // required: {value: required , message},
+                    required: { value: required , message: message },
                     minLength: min ? { value: min, message: `Minimum ${min} character is required!` }
                         : null,
                     pattern:
