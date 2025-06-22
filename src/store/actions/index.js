@@ -186,9 +186,9 @@ export const addUpdateUserAddress = (sendData, toast, addressId, setOpenAddressM
         if(!addressId){
             const { data } = await api.post("/address/addresses" , sendData);
         }else{
-            await api.put(`/addresses/${addressId}`, sendData);
+            await api.put(`/address/addresses/${addressId}`, sendData);
         }
-        // dispatch(getUserAddresses())
+        dispatch(getUserAddresses())
         toast.success("Address saved Successfully");
         dispatch({type: "IS_SUCCESS"});
     }catch(error){

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {AiOutlineLogin} from "react-icons/ai";
 import InputField from "../shared/InputField.jsx";
 import Spinners from "../shared/Spinners.jsx";
@@ -20,6 +20,7 @@ const AddAddressForm = ({ address, setOpenAddressModal }) => {
         register,
         handleSubmit,
         reset,
+        setValue,
         formState: { errors }
     } = useForm({
         mode: "onTouched",
@@ -31,14 +32,25 @@ const AddAddressForm = ({ address, setOpenAddressModal }) => {
     }
 
     const onSaveAddressHandler = async (data) => {
-        console.log("Login Click")
-        dispatch(addUpdateUserAddress(
-            data,
-            toast,
-            address?.addressId,
-            setOpenAddressModal
-        ))
+            dispatch(addUpdateUserAddress(
+                data,
+                toast,
+                address?.addressId,
+                setOpenAddressModal
+            ))
     }
+
+    useEffect(() => {
+        if (address?.addressId){
+            setValue("buildingName", address?.buildingName)
+            setValue("city", address?.city)
+            setValue("street", address?.street)
+            setValue("state", address?.state)
+            setValue("zipcode", address?.zipcode)
+            setValue("country", address?.country)
+        }
+    }, [address]);
+
 
   return (
 
@@ -49,7 +61,9 @@ const AddAddressForm = ({ address, setOpenAddressModal }) => {
           >
               <div className="flex justify-center items-center mb-4 font-semibold text-2xl text-slate-800  py-2 px-4">
                   <FaAddressCard className="mr-2 text-2xl"/>
-                  Add Address
+                  {!address?.addressId
+                      ? "Add Address"
+                      : "Update Address" }
               </div>
 
               <div className="flex flex-col gap-4">
