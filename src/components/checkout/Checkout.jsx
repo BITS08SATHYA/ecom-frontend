@@ -104,6 +104,7 @@ const Checkout = () => {
                 )}
             </div>
 
+            {errorMessage && <ErrorMessage message={errorMessage} />}
 
         </div>
     )
