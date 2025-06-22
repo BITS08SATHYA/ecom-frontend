@@ -6,17 +6,20 @@ import {getUserAddresses} from "../../store/actions/index.js";
 import toast from "react-hot-toast";
 import Skeleton from "../shared/Skeleton.jsx";
 import PaymentMethod from "./PaymentMethod.jsx";
+import OrderSummary from "./OrderSummary.jsx";
+import cart from "../cart/Cart.jsx";
 
 const Checkout = () => {
     const dispatch = useDispatch();
     const [activeStep, setActiveStep] = useState(0);
     const { isLoading, errorMessage } = useSelector((state) => state.errors);
+    const { cart, totalPrice } = useSelector((state) => state.carts);
     const { address, selectedUserCheckoutAddress } = useSelector((state) => state.auth)
     // const { address }  = useSelector(
     //     (state) => state.auth
     // )
 
-    const paymentMethod = false;
+    const { paymentMethod } = useSelector((state) => state.payment)
 
 
     const handleBack = () => {
@@ -70,6 +73,14 @@ const Checkout = () => {
                     }
                     {
                         activeStep === 1 && <PaymentMethod />
+                    }
+                    {
+                        activeStep === 2 && <OrderSummary
+                            totalPrice={totalPrice}
+                            cart={cart}
+                            address={selectedUserCheckoutAddress}
+                            paymentMethod={paymentMethod}
+                        />
                     }
                 </div>
             )}
