@@ -11,9 +11,9 @@ import {FaAddressCard} from "react-icons/fa";
 
 const AddAddressForm = ({ address, setOpenAddressModal }) => {
 
-    const { btnLoader } = useSelector((state) => state.errors);
-     const navigate = useNavigate();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
+    const { btnLoader } = useSelector((state) => state.errors);
     const [loader, setLoader] = useState(false);
 
     const {

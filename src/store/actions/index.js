@@ -183,7 +183,12 @@ export const addUpdateUserAddress = (sendData, toast, addressId, setOpenAddressM
     // const { user } = getState().auth;
     dispatch({type: "BUTTON_LOADER"});
     try{
-        const { data } = await api.post("/address/addresses" , sendData);
+        if(!addressId){
+            const { data } = await api.post("/address/addresses" , sendData);
+        }else{
+            await api.put(`/addresses/${addressId}`, sendData);
+        }
+        // dispatch(getUserAddresses())
         toast.success("Address saved Successfully");
         dispatch({type: "IS_SUCCESS"});
     }catch(error){
@@ -194,3 +199,18 @@ export const addUpdateUserAddress = (sendData, toast, addressId, setOpenAddressM
         setOpenAddressModal(false);
     }
 };
+
+export const getUserAddresses = () => async (dispatch, getState) => {
+    try{
+        dispatch({ type: "IS_FETCHING"});
+        const { data } = await api.get(`/address/addresses`);
+        dispatch({type: "USER_ADDRESS", payload: data});
+        dispatch({type: "IS_SUCCESS"});
+    }catch(error){
+        console.log(error)
+        dispatch(
+            {type: "IS_ERROR",
+            payload: error?.response?.data?.message || "Failed to fetch user address"}
+        );
+    }
+}
