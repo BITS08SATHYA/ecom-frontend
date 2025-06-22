@@ -4,6 +4,7 @@ import AddressInfo from "./AddressInfo.jsx";
 import {useDispatch, useSelector} from "react-redux";
 import {getUserAddresses} from "../../store/actions/index.js";
 import toast from "react-hot-toast";
+import Skeleton from "../shared/Skeleton.jsx";
 
 const Checkout = () => {
     const dispatch = useDispatch();
@@ -57,11 +58,19 @@ const Checkout = () => {
                 ))}
             </Stepper>
 
-            <div className="mt-5">
-                {
-                    activeStep === 0 && <AddressInfo address={address} />
-                }
-            </div>
+            {isLoading ? (
+                <div className='lg:w-[80%] mx-auto py-5'>
+                    <Skeleton />
+                </div>
+            ) : (
+                <div className="mt-5">
+                    {
+                        activeStep === 0 && <AddressInfo address={address} />
+                    }
+                </div>
+            )}
+
+
 
             <div
                 style={{boxShadow: "0 -2px 4px rgba(100,100,100,0.15"}}
