@@ -56,7 +56,7 @@ const AddAddressForm = ({ address, setOpenAddressModal }) => {
                   <InputField
                       label="Building Name"
                       required
-                      id="building"
+                      id="buildingName"
                       type="text"
                       placeholder="Enter Building Name"
                       message="*Building name is required"
@@ -89,7 +89,7 @@ const AddAddressForm = ({ address, setOpenAddressModal }) => {
                   <InputField
                       label="PinCode"
                       required
-                      id="pincode"
+                      id="zipcode"
                       type="text"
                       placeholder="Enter PinCode"
                       message="*PinCode is required"
