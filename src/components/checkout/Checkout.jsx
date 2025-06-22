@@ -8,6 +8,9 @@ import Skeleton from "../shared/Skeleton.jsx";
 import PaymentMethod from "./PaymentMethod.jsx";
 import OrderSummary from "./OrderSummary.jsx";
 import cart from "../cart/Cart.jsx";
+import StripePayment from "./StripePayment.jsx";
+import PaypalPayment from "./PaypalPayment.jsx";
+import ErrorPage from "../shared/ErrorPage.jsx";
 
 const Checkout = () => {
     const dispatch = useDispatch();
@@ -82,6 +85,16 @@ const Checkout = () => {
                             paymentMethod={paymentMethod}
                         />
                     }
+                    {
+                        activeStep === 3 &&
+                        <>
+                            {paymentMethod === "Stripe" ? (
+                                <StripePayment />
+                            ) : (
+                                <PaypalPayment />
+                            )}
+                        </>
+                    }
                 </div>
             )}
 
@@ -119,7 +132,7 @@ const Checkout = () => {
                 )}
             </div>
 
-            {errorMessage && <ErrorMessage message={errorMessage} />}
+            {errorMessage && <ErrorPage message={errorMessage} />}
 
         </div>
     )
