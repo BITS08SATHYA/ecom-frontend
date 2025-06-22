@@ -4,12 +4,12 @@ import InputField from "../shared/InputField.jsx";
 import Spinners from "../shared/Spinners.jsx";
 import {Link, useNavigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
-import {authenticateSignInUser} from "../../store/actions/index.js";
+import {addUpdateUserAddress, authenticateSignInUser} from "../../store/actions/index.js";
 import toast from "react-hot-toast";
 import {useDispatch, useSelector} from "react-redux";
 import {FaAddressCard} from "react-icons/fa";
 
-const AddAddressForm = () => {
+const AddAddressForm = ({ address, setOpenAddressModal }) => {
 
     const { btnLoader } = useSelector((state) => state.errors);
      const navigate = useNavigate();
@@ -27,12 +27,17 @@ const AddAddressForm = () => {
 
     const loginHandler = async (data) => {
         console.log("Login Click")
-        dispatch(authenticateSignInUser(data, toast, reset, navigate, setLoader))
+        // dispatch(authenticateSignInUser(data, toast, reset, navigate, setLoader))
     }
 
     const onSaveAddressHandler = async (data) => {
         console.log("Login Click")
-        // dispatch(authenticateSignInUser(data, toast, reset, navigate, setLoader))
+        dispatch(addUpdateUserAddress(
+            data,
+            toast,
+            address?.addressId,
+            setOpenAddressModal
+        ))
     }
 
   return (
