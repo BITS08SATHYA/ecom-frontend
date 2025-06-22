@@ -5,18 +5,30 @@ import AddressInfoModal from "./AddressInfoModal.jsx";
 import AddAddressForm from "./AddAddressForm.jsx";
 import {useDispatch, useSelector} from "react-redux";
 import AddressList from "./AddressList.jsx";
+import {DeleteModal} from "./DeleteModal.jsx";
+import toast from "react-hot-toast";
+import {deleteUserAddress} from "../../store/actions/index.js";
 
 const AddressInfo = ({ address }) => {
 
     const dispatch = useDispatch();
-  const [openAddressModal, setOpenAddressModal] = useState(false);
-  const [selectedAddress, setSelectedAddress] = useState("");
+    const [openAddressModal, setOpenAddressModal] = useState(false);
+    const [openDeleteModal, setOpenDeleteModal] = useState(false);
+    const [selectedAddress, setSelectedAddress] = useState("");
 
 
   const addNewAddressHandler = () => {
       setSelectedAddress("");
       setOpenAddressModal(true);
   };
+
+  const deleteAddressHandler = () => {
+    dispatch(deleteUserAddress(
+        toast,
+        selectedAddress?.addressId,
+        setOpenDeleteModal
+    ))
+  }
 
     const noAddressExist = !address || address.length === 0;
     const { isLoading, btnLoader } = useSelector((state) => state.errors);
@@ -60,6 +72,7 @@ const AddressInfo = ({ address }) => {
                                     addresses={address}
                                     setSelectedAddress={setSelectedAddress}
                                     setOpenAddressModal={setOpenAddressModal}
+                                    setOpenDeleteModal={setOpenDeleteModal}
                                 />
                             </div>
                                 {address.length > 0 && (
@@ -87,6 +100,14 @@ const AddressInfo = ({ address }) => {
             setOpenAddressModal={setOpenAddressModal}
           />
         </AddressInfoModal>
+
+        <DeleteModal
+            open={openDeleteModal}
+            loader={btnLoader}
+            setOpen={setOpenAddressModal}
+            title="Delete Address"
+            onDeleteHandler={deleteAddressHandler}
+        />
 
     </div>
   );
