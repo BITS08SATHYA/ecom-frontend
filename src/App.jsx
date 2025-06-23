@@ -13,6 +13,7 @@ import Login from "./components/auth/Login.jsx";
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import Register from "./components/auth/Register.jsx";
 import Checkout from "./components/checkout/Checkout.jsx";
+import PaymentConfirmation from "./components/checkout/PaymentConfirmation.jsx";
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -30,6 +31,7 @@ function App() {
 
            <Route path='/' element={<PrivateRoute /> } >
                <Route path='/checkout' element={<Checkout /> } />
+               <Route path='/order-confirm' element={<PaymentConfirmation /> } />
            </Route>
 
            <Route path='/' element={<PrivateRoute publicPage /> } >
